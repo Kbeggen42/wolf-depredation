@@ -1,5 +1,5 @@
 project:
-  title: "Research Template"
+  title: "Wolf Depredation & Cattle Loss"
   pre-render: 
     - utils/check_packages.R      # install required packages
     - utils/remove_artifacts.ts   # remove previously constructed files
@@ -13,17 +13,17 @@ project:
     - "!bibliography/"
 
 author:
-  - name: Aaron Gullickson
+  - name: Kristina Beggen
     orcid: 0000-0001-7237-8131
-    email: aarong@uoregon.edu
-    url: https://aarongullickson.netlify.app/
+    email: kbeggen@uoregon.edu
+    url: 
     attributes:
       corresponding: true
     affiliations:
       - id: uo
         name: University of Oregon
         department: Sociology
-        address: 727 PLC
+        address: 
         city: Eugene
         region: OR
         country: USA
