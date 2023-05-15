@@ -32,13 +32,21 @@ source(here("utils","functions.R"))
 
 # Introduction
 
-The reintroduction of wolves in the continental United States is often heralded as a conservation success story [Beggen 2019]. Wolves had been essentially eliminated in the lower 48 states by the mid-1900s, but the passage of the Endangered Species Act (ESA) paved the way for wolf reintroduction. In 1995 and 1996 wolves were translocated from Canada and released in Yellowstone National Park and the Sawtooth National Forest in Idaho. Over the proceeding decades wolf populations in the United States are on the rise, and this increase in population is matched with a rising contentiousness between pro-wolf and anti-wolf factions. 
+The reintroduction of wolves in the continental United States is often heralded as a conservation success story [Beggen 2019]. Wolves had been essentially eliminated in the lower 48 states by the mid-1900s, but the passage of the Endangered Species Act (ESA) paved the way for wolf reintroduction. In 1995 and 1996 wolves were translocated from Canada and released in Yellowstone National Park and the Sawtooth National Forest in Idaho. Over the proceeding decades wolf populations in the United States are on the rise, and this increase in population is matched with a rising contentiousness. The ranching community has been an outspoken voice challenging the conservation of wolves and their fraught position as an protected species. 
+
+Ranchers cite the economic costs of wolf depredation as a cause for their concerns. 
+
+In 2017, the United States Department of Agriculture (USDA) published a comprehensive report of all cattle and calf mortalities for the year 2015 [USDA 2017]. This publication details reported causes of predatory and non-predatory loss of cattle, including wolf depredation. Two years later, the Humane Society of the United States (HSUS) published a report relying heavily on the USDA report. The HSUS report clearly demonstrates that the amount of cattle lost to wolves is minuscule compared to other causes of death and the cattle population overall [HSUS 2019].
+However, the study area included the entire United States, much of which has no wolf population, thus deflating the percentage of wolf depredations in the national scale. The data used for the report was also from one single year and does not give an idea of how wolf depredation changes over time. 
+
+In this study I conduct a longitudinal analysis of the relationship between wolf population, cattle population and wolf depredation in the Western United States
 
 
 
-# Background
 
 # Data and Methods
+
+*be sure to list what states I chose and why
 
 # Results
 
