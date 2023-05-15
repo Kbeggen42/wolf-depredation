@@ -32,9 +32,9 @@ source(here("utils","functions.R"))
 
 # Introduction
 
-This quarto doc is for writing the manuscript. This is a test citation [@alba1990].
+The reintroduction of wolves in the continental United States is often heralded as a conservation success story [Beggen 2019]. Wolves had been essentially eliminated in the lower 48 states by the mid-1900s, but the passage of the Endangered Species Act (ESA) paved the way for wolf reintroduction. In 1995 and 1996 wolves were translocated from Canada and released in Yellowstone National Park and the Sawtooth National Forest in Idaho. Over the proceeding decades wolf populations in the United States are on the rise, and this increase in population is matched with a rising contentiousness between pro-wolf and anti-wolf factions. 
 
-hello wow wolves are cool!
+
 
 # Background
 
