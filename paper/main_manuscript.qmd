@@ -1,7 +1,7 @@
 ---
-title: "Wolves in the West: By the Numbers"
+title: "Wolves in the West: A Longitudinal Analysis of Wolf Depredations on Cattle"
 shorttitle: "Wolves in the West"
-abstract: An Abstract
+abstract: A super great abstract
 keywords: [wolves, cattle]
 thanks: Thanks to everyone for checking this out.
 reference-section-title: References
