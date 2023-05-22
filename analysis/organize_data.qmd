@@ -10,6 +10,7 @@ source(here("utils","check_packages.R"))
 source(here("utils","functions.R"))
 ```
 
-```{r}
+cattle_pop <- read_fwf("data/data_raw/cattle_numbers.csv")
+cattle_loss <- read_fwf("data/data_raw/cattle_loss.csv")
+wolf_data <- read_fwf("data/data_raw/wolf_data.csv")
 
-```
