@@ -42,11 +42,13 @@ In this study I conduct a longitudinal analysis of the relationship between wolf
 
 # Data and Methods
 
-The variables In question for this research are cattle population, cattle mortality, wolf population, and confirmed wolf kills for cattle. These variables are organized by state and year starting from 2012 and ending at 2022. I downloaded data on cattle population and mortality by state and year through the USDA Quickfacts database. 
+The variables In question for this research are cattle population, cattle mortality, wolf population, and confirmed wolf kills for cattle. These variables are organized by state and year starting from 2012 and ending at 2022. I downloaded data on cattle population and mortality by state and year through the USDA Quickfacts database. Two issues arise when considering the USDA cattle data. First, the numbers for population and mortalities are all very evenly rounded indicating estimation on the part of the USDA. Secondly, not all of the cattle in the dataset are on range. Cattle grazing on range land are at greater risk for depredation than cattle living on feedlots. 
 
 I compiled the wolf data set myself by reading through annual wolf reports published by each state's respective Fish and Wildlife agency. I combed through annual reports and gleaned the wolf population per year and the number of cattle mortalities confirmed by the state to have been caused by wolves. The issue of reporting gets complicated across state lines and agencies. Some state reports have differing designations for "possible", "probable" and "confirmed" wolf kills. For the sake of consistency I only counted confirmed wolf kills for this report. In 2020 Wyoming changed it's reporting practices and lumped in injured and killed cattle into one value, so I opted to drop the wolf depredation values in Wyoming starting in 2020. Montana has not yet published their 2022 wolf report, so those values are unavailable in my data set. 
 
 I originally intended to conduct this analysis with two additional states, Idaho and California. However, I encountered issues with a lack of data accessibility. Idaho has not published a wolf report for the public since 2016 and that is the only wolf report available on their Fish and Wildlife webpage. Without the help of a legal team I cannot pursue a FOIA request for that information so I made the tough decision to cut Idaho from this analysis, despite it's importance in wolf conservation and policy. California, on the other hand, publishes wolf reports quarterly that are difficult to glean yearlong information from. Given the difficulties of obtaining reliable annual information from Californian reports I made another tough decision to cut California from this report. 
+
+All of the data for this report was collected in May 2023. 
 
 # Results
 
