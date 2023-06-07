@@ -12,7 +12,32 @@ source(here("utils","functions.R"))
 
 ```{r}
 #| label: read-data
-cattle_pop <- read_csv(here("data","data_raw","cattle_numbers.csv"))
-cattle_loss <- read_csv(here("data","data_raw","cattle_loss.csv"))
+cattle_pop_raw <- read_csv(here("data","data_raw","cattle_numbers.csv"))
+cattle_loss_raw <- read_csv(here("data","data_raw","cattle_loss.csv"))
 wolf_data <- read_csv(here("data","data_raw","wolf_data.csv"))
+
+#remove unneeded info from cattle_pop and cattle_loss
+
+cattle_pop <- subset(cattle_pop_raw, select = c("Year", "State", "Value"))
+cattle_loss <- subset(cattle_loss_raw, select = c("Year", "State", "Value"))
+
+#drop unneeded years from cattle_pop and cattle_loss
+
+cattle_pop <- subset(cattle_pop, Year>2011)
+cattle_loss <- subset(cattle_loss, Year>2011)
+
+#drop the disappointing states with no usable wolf data and rename states
+
+cattle_pop <- cattle_pop |>
+  filter(State) |>
+  select(MONTANA, OREGON, WASHINGTON, WYOMING) |>
+  rename(montana= MONTANA, oregon= OREGON, washington= WASHINGTON,
+         wyoming= WYOMING)
+
+cattle_loss <- cattle_loss |>
+  filter(State) |>
+  select(MONTANA, OREGON, WASHINGTON, WYOMING) |>
+  rename(montana= MONTANA, oregon= OREGON, washington= WASHINGTON,
+         wyoming= WYOMING)
+
 ```
