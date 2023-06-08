@@ -81,6 +81,8 @@ all_combo <- all_combo |>
 all_combo <- all_combo |>
   rename(year=Year.x)
 
-#all done! 
+#all done! Save work
+
+save(all_combo, file=here("data", "data_constructed", analytical_data.RData))
  
 ```
