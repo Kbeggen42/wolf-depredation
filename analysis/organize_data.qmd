@@ -50,5 +50,29 @@ wolf_data["wolf pop"][wolf_data["wolf pop"] == "na"] <- NA
 
 wolf_data["cattle kills"][wolf_data["cattle kills"] == "na"] <- NA
 
+#rename value column for cattle data
+
+cattle_pop <- cattle_pop |>
+  rename(total_pop=Value)
+
+cattle_loss <- cattle_loss |>
+  rename(total_loss=Value)
+
+#join cattle datasets
+
+cattle_combo <- left_join(cattle_pop,cattle_loss, by="State")
+
+cattle_combo <- cattle_combo |>
+  distinct(Year.x, State, .keep_all=TRUE) 
+ 
+rename_state <- cattle_combo |>
+  rename(State=state)
+
+all_combo <- left_join(rename_state, wolf_data, by="state")
+
+all_combo <- all_combo |>
+  distinct(Year.x, state, .keep_all=TRUE) |>
+  select(Year.x, state, total_pop, total_loss, `wolf pop`, `cattle kills`)
+ #join all datasets into one
 
 ```
