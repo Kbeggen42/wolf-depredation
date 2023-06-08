@@ -44,8 +44,11 @@ cattle_loss$State[cattle_loss$State == "OREGON"] <- "oregon"
 cattle_loss$State[cattle_loss$State == "WASHINGTON"] <- "washington"
 cattle_loss$State[cattle_loss$State == "WYOMING"] <- "wyoming"
 
+#tell R Studio that na is a missing value in wolf data
 
+wolf_data["wolf pop"][wolf_data["wolf pop"] == "na"] <- NA
 
+wolf_data["cattle kills"][wolf_data["cattle kills"] == "na"] <- NA
 
 
 ```
