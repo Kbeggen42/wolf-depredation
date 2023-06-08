@@ -29,12 +29,21 @@ cattle_loss <- subset(cattle_loss, Year>2011)
 #drop the disappointing states with no usable wolf data and rename states
 
 cattle_pop <- cattle_pop |>
+    filter(State!="IDAHO" & State!="CALIFORNIA") 
+
+cattle_loss <- cattle_loss |>
+    filter(State!="IDAHO" & State!="CALIFORNIA")
+
+
+
+
+#cattle_pop <- cattle_pop |>
   filter(State) |>
   select(MONTANA, OREGON, WASHINGTON, WYOMING) |>
   rename(montana= MONTANA, oregon= OREGON, washington= WASHINGTON,
          wyoming= WYOMING)
 
-cattle_loss <- cattle_loss |>
+#cattle_loss <- cattle_loss |>
   filter(State) |>
   select(MONTANA, OREGON, WASHINGTON, WYOMING) |>
   rename(montana= MONTANA, oregon= OREGON, washington= WASHINGTON,
