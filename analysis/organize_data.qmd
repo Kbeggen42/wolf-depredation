@@ -12,77 +12,40 @@ source(here("utils","functions.R"))
 
 ```{r}
 #| label: read-data
-cattle_pop_raw <- read_csv(here("data","data_raw","cattle_numbers.csv"))
-cattle_loss_raw <- read_csv(here("data","data_raw","cattle_loss.csv"))
-wolf_data <- read_csv(here("data","data_raw","wolf_data.csv"))
+cattle_pop <- read_csv(here("data","data_raw","cattle_numbers.csv"))
+cattle_loss <- read_csv(here("data","data_raw","cattle_loss.csv"))
+wolf_data <- read_csv(here("data","data_raw","wolf_data.csv"),
+                      na="na")
+```
 
-#remove unneeded info from cattle_pop and cattle_loss
 
-cattle_pop <- subset(cattle_pop_raw, select = c("Year", "State", "Value"))
-cattle_loss <- subset(cattle_loss_raw, select = c("Year", "State", "Value"))
-
-#drop unneeded years from cattle_pop and cattle_loss
-
-cattle_pop <- subset(cattle_pop, Year>2011)
-cattle_loss <- subset(cattle_loss, Year>2011)
-
-#drop the disappointing states with no usable wolf data and rename states
-
+```{r}
+#| label: clean-and-merge
 cattle_pop <- cattle_pop |>
-    filter(State!="IDAHO" & State!="CALIFORNIA")
-
-cattle_pop$State[cattle_pop$State == "MONTANA"] <- "montana"
-cattle_pop$State[cattle_pop$State == "OREGON"] <- "oregon"
-cattle_pop$State[cattle_pop$State == "WASHINGTON"] <- "washington"
-cattle_pop$State[cattle_pop$State == "WYOMING"] <- "wyoming"
+  select(Year, State, Value) |>
+  rename(year=Year, state=State, total_pop=Value) |> 
+  mutate(state=str_to_lower(state))
 
 cattle_loss <- cattle_loss |>
-    filter(State!="IDAHO" & State!="CALIFORNIA")
+  select(Year, State, Value) |>
+  rename(year=Year, state=State, total_loss=Value) |> 
+  mutate(state=str_to_lower(state))
+  
+wolf_data <- wolf_data |>
+  rename(wolf_pop=`wolf pop`, wolf_cattle_kills=`cattle kills`)
 
-cattle_loss$State[cattle_loss$State == "MONTANA"] <- "montana"
-cattle_loss$State[cattle_loss$State == "OREGON"] <- "oregon"
-cattle_loss$State[cattle_loss$State == "WASHINGTON"] <- "washington"
-cattle_loss$State[cattle_loss$State == "WYOMING"] <- "wyoming"
+all_combo <- full_join(cattle_pop, cattle_loss) |>
+  full_join(wolf_data)
 
-#tell R Studio that na is a missing value in wolf data
-
-wolf_data["wolf pop"][wolf_data["wolf pop"] == "na"] <- NA
-
-wolf_data["cattle kills"][wolf_data["cattle kills"] == "na"] <- NA
-
-#rename value column for cattle data
-
-cattle_pop <- cattle_pop |>
-  rename(total_pop=Value)
-
-cattle_loss <- cattle_loss |>
-  rename(total_loss=Value)
-
-#join cattle datasets
-
-cattle_combo <- left_join(cattle_pop,cattle_loss, by="State")
-
-cattle_combo <- cattle_combo |>
-  distinct(Year.x, State, .keep_all=TRUE) 
- 
-rename_state <- cattle_combo |>
-  rename(State=state)
-
-#join all datasets into one and drop extra year variables
-
-all_combo <- left_join(rename_state, wolf_data, by="state")
+keep_states <- c("montana","oregon","washington","wyoming")
 
 all_combo <- all_combo |>
-  distinct(Year.x, state, .keep_all=TRUE) |>
-  select(Year.x, state, total_pop, total_loss, `wolf pop`, `cattle kills`)
+  filter(state %in% keep_states & year > 2011)
+```
 
-#rename year column
+```{r}
+#| label: save-data
 
-all_combo <- all_combo |>
-  rename(year=Year.x)
-
-#all done! Save work
-
-save(all_combo, file=here("data", "data_constructed", analytical_data.RData))
+save(all_combo, file=here("data", "data_constructed", "analytical_data.RData"))
  
 ```
