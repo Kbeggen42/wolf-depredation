@@ -14,5 +14,21 @@ source(here("utils","functions.R"))
 
 load(here("data","data_constructed","analytical_data.RData"))
 
+#create graphs
+  # what if I add all of the dependent values at once?
+
+ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
+  geom_point(aes(color=state), alpha=0.7)+
+  labs(x="Year", y="Individual animals")+
+  theme_bw()
+
+
 ```
+```
+
+```{r}
+
+
+
+
 ```
