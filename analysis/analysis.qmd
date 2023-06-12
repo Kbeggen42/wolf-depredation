@@ -16,19 +16,72 @@ load(here("data","data_constructed","analytical_data.RData"))
 
 #create graphs
   # what if I add all of the dependent values at once?
+    #gets very upset lol-- make individual graphs for each dependent variable
+      #first. A graph with everything at once may look too wacky to read anyway
 
-ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
+#Total cattle population
+
+ggplot(all_combo, aes(x=year, y=total_pop))+
   geom_point(aes(color=state), alpha=0.7)+
-  labs(x="Year", y="Individual animals")+
+  labs(x="Year", y="Cattle Population")+
   theme_bw()
 
+#montana has a TON of cows-- largest state (by area) in dataset
+  #all other states are pretty closely clustered
 
 ```
+```{r}
+
+#Total cattle loss for each state 
+
+ggplot(all_combo, aes(x=year, y=total_loss))+
+  geom_point(aes(color=state), alpha=0.7)+
+  labs(x="Year", y="Cattle Deaths Total")+
+  theme_bw()
+
+#numbers are more evenly spread-- montana is still highest
+  #oregon essentially flatlines
+  #2019 looked like a bad year for all cows in these states RIP
+
 ```
+
 
 ```{r}
 
+#Total wolf population
 
+ggplot(all_combo, aes(x=year, y=wolf_pop))+
+  geom_point(aes(color=state), alpha=0.7)+
+  labs(x="Year", y="Wolf Population")+
+  theme_bw()
+
+#montana still winning the highest numbers game-- i guess it's because of the 
+#sheer size of the state and the large rural expanses? 
+  #wolf pop slightly growing in each state
+  #montana has gone down a wee bit looks like-- caveat being their wolf pop
+  #monitoring is suspicious 
+
+```
+```{r}
+
+#Cattle loss from wolves
+
+ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
+  geom_point(aes(color=state), alpha=0.7)+
+  labs(x="Year", y="Wolf Depredations on Cattle")+
+  theme_bw()
+
+#Wyoming has a wild outlier in 2017
+#oregon's numbers have been steadily increasing-- may be informing recent 
+#poaching incidents. 
+
+```
+
+
+```{r}
+
+#have all these cool graphs-- now what? 
 
 
 ```
+
