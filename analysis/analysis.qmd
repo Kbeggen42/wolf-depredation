@@ -75,6 +75,9 @@ ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
 #oregon's numbers have been steadily increasing-- may be informing recent 
 #poaching incidents. 
 
+#3 log difference between total cattle deaths and wolf caused deaths-- wolf 
+#depredations are so dang minor 
+
 ```
 
 
@@ -82,6 +85,25 @@ ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
 
 #have all these cool graphs-- now what? 
 
+#for every number of wolves there's only a whatever percentage of cows that
+#were killed by them
+
+#data shows that wolves aren't that dangerous to cattle-- depredation is always 
+#under 100 
+
+#let's make a model
+
+model1 <- lm(all_combo$wolf_cattle_kills~all_combo$wolf_pop)
+
+summary(model1)
+
+ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
+  geom_smooth(method = "lm", se=TRUE)+
+  geom_point()+
+  labs(x="Year", y="wolf depredations")+
+  theme_bw()
+
+coef(lm(year~wolf_cattle_kills, data=all_combo))
 
 ```
 
