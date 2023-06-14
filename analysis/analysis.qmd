@@ -6,6 +6,7 @@ title: "Research Analysis Notebook"
 #| label: setup
 #| include: false
 library(here)
+library(texreg)
 source(here("utils","check_packages.R"))
 source(here("utils","functions.R"))
 ```
@@ -209,6 +210,10 @@ ggplot(all_combo, aes(x=year, y=wolf_pop))+
 #| tbl-cap: LM Models
 #| results: asis
 
+model1 <- lm(all_combo$year~all_combo$wolf_pop)
+model2 <- lm(all_combo$year~all_combo$wolf_cattle_kills)
+model3 <- lm(all_combo$year~all_combo$total_loss)
+
 texreg(list(model1,model2,model3),
       custom.coef.names = c("Intercept", "Wolf Population", "Wolf Cattle
                             Depredation", "Total Cattle Loss"),
@@ -217,7 +222,7 @@ texreg(list(model1,model2,model3),
                             include.rsquared=TRUE,
                             include.adjrs=FALSE,
                             include.nobs=TRUE,
-                            include.rmse=FALSE) 
+                            include.rmse=FALSE)
        
 
 
