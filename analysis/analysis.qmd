@@ -11,6 +11,8 @@ source(here("utils","functions.R"))
 ```
 
 ```{r}
+#| label: fig-one
+#| fig-cap: Cattle population per state over 10 years
 
 load(here("data","data_constructed","analytical_data.RData"))
 
@@ -23,35 +25,48 @@ load(here("data","data_constructed","analytical_data.RData"))
 
 ggplot(all_combo, aes(x=year, y=total_pop))+
   geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
   labs(x="Year", y="Cattle Population")+
   theme_bw()
 
 #montana has a TON of cows-- largest state (by area) in dataset
   #all other states are pretty closely clustered
+    #oregon, washington and wyoming seem pretty stable, but montana is seeing
+    #a big decline since 2017
 
 ```
 ```{r}
-
-#Total cattle loss for each state 
+#| label: fig-two
+#| fig-cap: Total number of cattle deaths per state for 10 years
 
 ggplot(all_combo, aes(x=year, y=total_loss))+
   geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
   labs(x="Year", y="Cattle Deaths Total")+
   theme_bw()
 
 #numbers are more evenly spread-- montana is still highest
   #oregon essentially flatlines
-  #2019 looked like a bad year for all cows in these states RIP
+    #2019 looked like a bad year for all cows in these states RIP
+      #still thinking about montana's overall decline since 2017-- these deaths 
+      #could be a part of it, but still-- in 2019 montana lost 70,000 cows
+      #but had 2.5 million. a drop in the bucket. must be market forces? less
+      #u.s. demand for chicken?
 
 ```
 
 
 ```{r}
+#| label: fig-three
+#| fig-cap: Wolf population per state over 10 years
 
-#Total wolf population
 
 ggplot(all_combo, aes(x=year, y=wolf_pop))+
   geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
   labs(x="Year", y="Wolf Population")+
   theme_bw()
 
@@ -63,11 +78,13 @@ ggplot(all_combo, aes(x=year, y=wolf_pop))+
 
 ```
 ```{r}
-
-#Cattle loss from wolves
+#| label: fig-four
+#| fig-cap: Confirmed wolf depredations on cattle per state over 10 years
 
 ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
   geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
   labs(x="Year", y="Wolf Depredations on Cattle")+
   theme_bw()
 
@@ -84,26 +101,125 @@ ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
 ```{r}
 
 #have all these cool graphs-- now what? 
+#what about looking at the vast number of cows that didn't die becuase of
+#wolves?
 
-#for every number of wolves there's only a whatever percentage of cows that
-#were killed by them
+non_wolf_deaths <- all_combo$total_loss - all_combo$wolf_cattle_kills
 
-#data shows that wolves aren't that dangerous to cattle-- depredation is always 
-#under 100 
+table(non_wolf_deaths)
 
-#let's make a model
+#should I average the number of cattle that died per state and compare that 
+#with the average number of wolf depredations per state and the average number 
+#of non-wolf related deaths per state?
 
-model1 <- lm(all_combo$wolf_cattle_kills~all_combo$wolf_pop)
+```
+```{r}
+#average number of cows lost for every state per year over the last 10 years
 
-summary(model1)
-
-ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
-  geom_smooth(method = "lm", se=TRUE)+
-  geom_point()+
-  labs(x="Year", y="wolf depredations")+
-  theme_bw()
-
-coef(lm(year~wolf_cattle_kills, data=all_combo))
+mean(all_combo$total_loss)
 
 ```
 
+```{r}
+#average number of cows killed by wolves per year over the last 10 years
+
+mean(all_combo$wolf_cattle_kills, na.rm = TRUE)
+
+```
+
+```{r}
+#number of cattle killed by wolves over the total number of cattle lost
+
+30.57/38500
+
+#such a tiiiiiny number of cows die from wolf attacks
+```
+
+
+```{r}
+#for every number of wolves there's only a whatever percentage of cows that
+#were killed by them
+
+#data shows that wolves aren't that dangerous to cattle-- depredation is almost
+#always under 100 except for one wild year in wy when 113 died
+
+#Look at correlation coefficient? 
+
+cor(all_combo$wolf_pop, all_combo$wolf_cattle_kills)
+
+#maybe not? lol
+#Get NA answer-- is that because they have no relationship or because the 
+#function makes no sense?
+
+
+```
+
+```{r}
+
+#let's make models
+
+model1 <- lm(all_combo$year~all_combo$wolf_pop)
+model2 <- lm(all_combo$year~all_combo$wolf_cattle_kills)
+model3 <- lm(all_combo$year~all_combo$total_loss)
+
+```
+
+
+```{r}
+#| label: fig-five
+#| fig-cap: Total number of cattle deaths per state for 10 years as a LM
+#essentially a graph of model2
+
+ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
+  geom_smooth(method = "lm", se=TRUE)+
+  geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="wolf depredations")+
+  theme_bw()
+
+#shows that wolf depredations are on the rise-- slope looks fairly small.
+  #smaller than the slope of wolf population?
+
+```
+
+```{r}
+#| label: fig-six
+#| fig-cap: Total wolf population per state for 10 years as a LM
+#essentially a graph of model1
+
+ggplot(all_combo, aes(x=year, y=wolf_pop))+
+  geom_smooth(method = "lm", se=TRUE)+
+  geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="wolf population")+
+  theme_bw()
+
+#trending downward!! 
+  #there's this idea that as wolf population increases states will see an
+  #increase of depredations and will need to kill more wolves
+  #this model shows that isn't the case. Basing this idea on wolf population
+  #doesn't make sense. Other factors may be leading to increased depredations:
+    #rancher behavior, better reporting, changed wolf behavior, climate change
+
+```
+
+```{r}
+#| label: tbl-1
+#| tbl-cap: LM Models
+#| results: asis
+
+texreg(list(model1,model2,model3),
+      custom.coef.names = c("Intercept", "Wolf Population", "Wolf Cattle
+                            Depredation", "Total Cattle Loss"),
+                            digits=3,
+                            caption.above=TRUE,
+                            include.rsquared=TRUE,
+                            include.adjrs=FALSE,
+                            include.nobs=TRUE,
+                            include.rmse=FALSE) 
+       
+
+
+```
