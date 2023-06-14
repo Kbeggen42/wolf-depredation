@@ -64,7 +64,7 @@ Figure 4 displays the wolf population for each state. Toward the bottom of the s
 
 Figure 5 shows confirmed wolf depredations of cattle for each state. Wyoming has the most erratic data in the scatterplot. Most depredations in Wyoming fall between 30-60 instances per year, but there is one sizable outlier in 2017 with 113 confirmed cattle deaths. Montana, Oregon and Washington are all experiencing an increase in wolf depredation events, with Oregon seeing a marked increase starting in 2019. Washington stays fairly stable, with depredations never increasing over 15 instances. Montana has more variation with a distinct increase in depredation starting in 2014. 
 
-Despite these increases in depredation events, it is crucial to note the scale between figures. There is a 3 log difference between the y-axis values of figure 2 and figure 5. The number of overall cattle deaths is counted in the tens of thousands, while the highest wolf depredation year of this study was 113 cases-- an single unusually high outlier. The average total cattle loss per year for each state over the 10 year period is 38500 cattle and calves. The average number of confirmed wolf depredations per year for each state over the same 10 years is 31. Cattle, on average, had a 0.08% chance of being confirmed to have been killed by a wolf in these states over the last decade. 
+Despite these increases in depredation events, it is crucial to note the scale between figures. There is a 3 log difference between the y-axis values of figure 2 and figure 5. The number of overall cattle deaths is counted in the tens of thousands, while the highest wolf depredation year of this study was 113 cases-- an single unusually high outlier. The average total cattle loss per year for each state over the 10 year period is 38500 cattle and calves. The average number of confirmed wolf depredations per year for each state over the same 10 years is 31. The average percent of cattle confirmed to have been killed by wolves over this ten year period was 0.08%. 
 
 Figure 6 displays a linear model depicting the increased confirmed depredation events between all 4 states over the decade. (talk about the slope-- how much on an increase per year)
 
@@ -72,5 +72,17 @@ Figure 7 showcases another linear model of wolf population across Oregon, Montan
 
 Table 1 
 
+Instances of wolf depredations are, on average in these states, on the rise while wolf numbers are remaining steady, refuting the idea that wolf depredations increase in tandem with population. Wolf population dynamics are not enough to explain increases in depredation events on cattle. (insert language about wolf population being blamed on depredation above in intro) 
+
 
 # Conclusions
+
+
+This research has clearly shown that in the states of Montana, Oregon, Washington and Wyoming wolves are not a major source of economic pressure on cattle industries. 
+
+Future research should look into 
+
+A question remains: why are cases of wolf depredation on cattle increasing despite a relatively stable wolf population? 
+
+There is a range of other proposed reasons for wolf depredation including: an increase of lethal control of wolf population (Santiago-Avila), climate change (need citation), changes in wolf behavior (need citation) and changes in human behavior (need citation). I would also hypothesize that changes in reporting at the state agency level could affect wolf depredation reports. Research that delves into these potential causes of wolf depredation on cattle could be of great use to government agencies, ranching operations, conservation organizations and policy makers invested in fostering best practices and protecting the lives of cattle and wolves through conflict prevention. 
+
