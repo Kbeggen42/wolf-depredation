@@ -165,12 +165,10 @@ mean(all_combo$wolf_cattle_kills, na.rm = TRUE)
 
 #Look at correlation coefficient? 
 
-cor(all_combo$wolf_pop, all_combo$wolf_cattle_kills)
+cor(all_combo$wolf_pop, all_combo$wolf_cattle_kills, use="complete.obs")
 
-#maybe not? lol
-#Get NA answer-- is that because they have no relationship or because the 
-#function makes no sense?
-
+#for correlation coef-- closer to 0 is no relationship, closer to 1 
+#is a closer relationship
 
 ```
 
@@ -236,8 +234,8 @@ model3 <- lm(all_combo$total_loss~all_combo$year)
 summary(model1)
 summary(model2)
 
-texreg(list(model1,model2,model3),
-      custom.coef.names= c("Intercept", "Wolf Population", 
+screenreg(list(model1,model2,model3),
+      custom.model.names= c("Wolf Population", 
                            "Wolf Cattle Depredation", "Total Cattle Loss"),
       digits=3,
       caption.above=TRUE,
@@ -246,6 +244,4 @@ texreg(list(model1,model2,model3),
       include.nobs=TRUE,
       include.rmse=FALSE)
        
-
-
 ```
