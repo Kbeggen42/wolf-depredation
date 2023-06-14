@@ -48,7 +48,7 @@ ggplot(all_combo, aes(x=year, y=total_loss))+
                      2018, 2019, 2020, 2021, 2022))+
   labs(x="Year", y="Cattle Deaths Total")+
   theme_bw()
-
+  
 #numbers are more evenly spread-- montana is still highest
   #oregon essentially flatlines
     #2019 looked like a bad year for all cows in these states RIP
@@ -61,6 +61,25 @@ ggplot(all_combo, aes(x=year, y=total_loss))+
 
 ```{r}
 #| label: fig-three
+#| fig-cap: Linear model of cattle death trends.
+
+ggplot(all_combo, aes(x=year, y=total_loss))+
+  geom_point(aes(color=state), alpha=0.7)+
+  geom_smooth(method = "lm", se = FALSE)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="Cattle Deaths Total")+
+  theme_bw()+
+  facet_wrap(~ state, nrow = 4)
+
+
+#this demonstrates that the 2015 data will probably be about the same over the
+#years-- except slightly higher in montana as shown in the lm
+
+```
+
+```{r}
+#| label: fig-four
 #| fig-cap: Wolf population per state over 10 years
 
 
@@ -80,7 +99,7 @@ ggplot(all_combo, aes(x=year, y=wolf_pop))+
 ```
 
 ```{r}
-#| label: fig-four
+#| label: fig-five
 #| fig-cap: Confirmed wolf depredations on cattle per state over 10 years
 
 ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
@@ -166,7 +185,7 @@ model3 <- lm(all_combo$total_loss~all_combo$year)
 ```
 
 ```{r}
-#| label: fig-five
+#| label: fig-six
 #| fig-cap: Total number of cattle deaths per state for 10 years as a LM
 #essentially a graph of model2
 
@@ -184,7 +203,7 @@ ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
 ```
 
 ```{r}
-#| label: fig-six
+#| label: fig-seven
 #| fig-cap: Total wolf population per state for 10 years as a LM
 #essentially a graph of model1
 
