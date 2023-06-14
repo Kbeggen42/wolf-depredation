@@ -36,6 +36,7 @@ ggplot(all_combo, aes(x=year, y=total_pop))+
     #a big decline since 2017
 
 ```
+
 ```{r}
 #| label: fig-two
 #| fig-cap: Total number of cattle deaths per state for 10 years
@@ -57,7 +58,6 @@ ggplot(all_combo, aes(x=year, y=total_loss))+
 
 ```
 
-
 ```{r}
 #| label: fig-three
 #| fig-cap: Wolf population per state over 10 years
@@ -77,6 +77,7 @@ ggplot(all_combo, aes(x=year, y=wolf_pop))+
   #monitoring is suspicious 
 
 ```
+
 ```{r}
 #| label: fig-four
 #| fig-cap: Confirmed wolf depredations on cattle per state over 10 years
@@ -97,7 +98,6 @@ ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
 
 ```
 
-
 ```{r}
 
 #have all these cool graphs-- now what? 
@@ -113,6 +113,7 @@ table(non_wolf_deaths)
 #of non-wolf related deaths per state?
 
 ```
+
 ```{r}
 #average number of cows lost for every state per year over the last 10 years
 
@@ -134,7 +135,6 @@ mean(all_combo$wolf_cattle_kills, na.rm = TRUE)
 
 #such a tiiiiiny number of cows die from wolf attacks
 ```
-
 
 ```{r}
 #for every number of wolves there's only a whatever percentage of cows that
@@ -163,7 +163,6 @@ model2 <- lm(all_combo$year~all_combo$wolf_cattle_kills)
 model3 <- lm(all_combo$year~all_combo$total_loss)
 
 ```
-
 
 ```{r}
 #| label: fig-five
