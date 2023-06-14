@@ -217,7 +217,8 @@ model3 <- lm(all_combo$total_loss~all_combo$year)
 summary(model1)
 
 texreg(list(model1,model2,model3),
-      custom.coef.names= c("Intercept", "Wolf Population", "Wolf Cattle Depredation", "Total Cattle Loss"),
+      custom.coef.names= c("Intercept", "Wolf Population", 
+                           "Wolf Cattle Depredation", "Total Cattle Loss"),
       digits=3,
       caption.above=TRUE,
       include.rsquared=TRUE,
