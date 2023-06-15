@@ -30,7 +30,7 @@ source(here("utils","check_packages.R"))
 source(here("utils","functions.R"))
 library(ggplot2)
 library(texreg)
-load(here("analysis","analysis.qmd))
+load(here("analysis","analysis.qmd"))
 ```
 
 # Introduction
