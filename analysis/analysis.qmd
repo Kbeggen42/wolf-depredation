@@ -242,3 +242,9 @@ screenreg(list(model1,model2,model3),
       include.rmse=FALSE)
        
 ```
+```{r}
+#| label: save-data
+
+#do I need to save this so I can render the final manuscript?
+ 
+```
