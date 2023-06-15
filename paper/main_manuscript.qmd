@@ -28,6 +28,9 @@ format:
 library(here)
 source(here("utils","check_packages.R"))
 source(here("utils","functions.R"))
+library(ggplot2)
+library(texreg)
+load(here("analysis","analysis.qmd))
 ```
 
 # Introduction
@@ -54,19 +57,137 @@ All of the data for this report was collected in May 2023.
 
 After cleaning and organizing my data, I constructed scatterplots for each of the four dependent variables: the cattle population by state,the total number of cattle mortalities per state, the wolf population per state, and the total number of confirmed wolf depredations on cattle per state. The scatterplots can be viewed below. 
 
+```{r}
+#| label: fig-one
+#| fig-cap: Cattle population per state over 10 years
+
+ggplot(all_combo, aes(x=year, y=total_pop))+
+  geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="Cattle Population")+
+  theme_bw()
+
+```
+
 Figure 1 demonstrates the sheer number of cattle housed within each state, with Montana far outranking Oregon, Wyoming and Washington. As mentioned previously, the USDA data does not differentiate between cattle on range and cattle confined within feedlots. Given this detail, this dataset does not accurately demonstrate how many cattle are at risk from wolf depredation. However, it does show how economically important cattle are for these states, and shows economic trends. Wyoming, Oregon, and Washington, all toward the bottom of the scatterplot, have similar cattle populations that have not fluctuated greatly since 2012. Montana, however, has seen a marked decline in cattle numbers since 2017. 
+
+```{r}
+#| label: fig-two
+#| fig-cap: Total number of cattle deaths per state for 10 years
+
+ggplot(all_combo, aes(x=year, y=total_loss))+
+  geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="Cattle Deaths Total")+
+  theme_bw()
+
+```
 
 Figure 2 details the total mortalities for cattle in each state. This dataset does not differentiate between kinds of mortality, so it does not give a full scope of the reported causes of death. Given the 2015 data published by the USDA, we can hypothesize that the majority of deaths were caused by respiratory issues, however, we do not have the exact numbers. According to the USDA report, in 2015 98% of all deaths in adult cattle were non-predator related, with respiratory effects claiming 23.9% [USDA 2017]. 89% of all calf deaths in 2015 were attributed to non-predator causes, with respiratory issues again claiming the most lives at 26.9%. In Figure 2, Oregon appears to show the least variance, with an increase in 2019 that returned to a stable line. Montana, Wyoming and Washington showed more variance in the distribution of their data points.
 
+```{r}
+#| label: fig-three
+#| fig-cap: Linear model of cattle death trends.
+
+ggplot(all_combo, aes(x=year, y=total_loss))+
+  geom_point(aes(color=state), alpha=0.7)+
+  geom_smooth(method = "lm", se = FALSE)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="Cattle Deaths Total")+
+  theme_bw()+
+  facet_wrap(~ state, nrow = 4)
+
+```
+
 Figure 3 is a linear model that draws a line of best fit for each state that helps to determine mortality trends. This addition shows that Wyoming and Washington also have fairly stable mortality trends without much change. Montana shows an upward trend in cattle mortality. 
 
+```{r}
+#| label: fig-four
+#| fig-cap: Wolf population per state over 10 years
+
+
+ggplot(all_combo, aes(x=year, y=wolf_pop))+
+  geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="Wolf Population")+
+  theme_bw()
+
+```
+
 Figure 4 displays the wolf population for each state. Toward the bottom of the scatterplot, Oregon and Washington have very similar values with upward trends. The wolf population for Washington and Oregon effectively double over the decade covered in the figure. Wyoming, despite some missing values, stays fairly stable and the wolf population does not rise above 300 individuals and dips below 250 individuals once in 2014-- before a two year data gap where their population recovers. Montana, again, is at the top of the scatterplot with a wolf population consistently over 1000 individuals. However, the wolf population reporting system in Montana is contentious. Washington, Oregon and Wyoming physically count wolf populations in the wild using traditional methods, while Montana solely uses a statistical model, iPOM, to track wolf populations in the state. This practice has come under fire for it's secrecy, questionable efficacy and implications in liberalizing the hunting of wolves [Treves & Santiago-Avila 2021]. Aside from the population estimate controversy, I hypothesize that Montana has the highest wolf and cattle populations (and thus highest cattle mortalities) because of that state's large size. 
+
+```{r}
+#| label: fig-five
+#| fig-cap: Confirmed wolf depredations on cattle per state over 10 years
+
+ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
+  geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="Wolf Depredations on Cattle")+
+  theme_bw()
+
+```
 
 Figure 5 shows confirmed wolf depredations of cattle for each state. Wyoming has the most erratic data in the scatterplot. Most depredations in Wyoming fall between 30-60 instances per year, but there is one sizable outlier in 2017 with 113 confirmed cattle deaths. Montana, Oregon and Washington are all experiencing an increase in wolf depredation events, with Oregon seeing a marked increase starting in 2019. Washington stays fairly stable, with depredations never increasing over 15 instances. Montana has more variation with a distinct increase in depredation starting in 2014. 
 
 Despite these increases in depredation events, it is crucial to note the scale between figures. There is a 3 log difference between the y-axis values of figure 2 and figure 5. The number of overall cattle deaths is counted in the tens of thousands, while the highest wolf depredation year of this study was 113 cases-- an single unusually high outlier. The average total cattle loss per year for each state over the 10 year period is 38500 cattle and calves. The average number of confirmed wolf depredations per year for each state over the same 10 years is 31. The average percent of cattle confirmed to have been killed by wolves per year over this ten year period was 0.08%. 
 
-Figures 6 and 7 display linear models that depict cattle depredation trends and wolf population respectively. Table 1 provides information for three models I constructed: Model 1 concerns cattle depredation, Model 2 concerns wolf population, and Model 3 concerns overall cattle mortality. 
+```{r}
+#| label: fig-six
+#| fig-cap: Total number of cattle deaths per state for 10 years as a LM
+
+ggplot(all_combo, aes(x=year, y=wolf_cattle_kills))+
+  geom_smooth(method = "lm", se=TRUE)+
+  geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="wolf depredations")+
+  theme_bw()
+
+```
+```{r}
+#| label: fig-seven
+#| fig-cap: Total wolf population per state for 10 years as a LM
+#essentially a graph of model1
+
+ggplot(all_combo, aes(x=year, y=wolf_pop))+
+  geom_smooth(method = "lm", se=TRUE)+
+  geom_point(aes(color=state), alpha=0.7)+
+  scale_x_continuous(breaks = c(2012, 2013,2014, 2015, 2016, 2017,
+                     2018, 2019, 2020, 2021, 2022))+
+  labs(x="Year", y="wolf population")+
+  theme_bw()
+
+```
+
+
+Figures 6 and 7 display linear models that depict cattle depredation trends and wolf population respectively. Table 1 (below) provides information for three models I constructed: Model 1 concerns cattle depredation, Model 2 concerns wolf population, and Model 3 concerns overall cattle mortality. 
+
+```{r}
+#| label: tbl-1
+#| tbl-cap: LM Models
+#| results: asis
+
+model1 <- lm(all_combo$wolf_pop~all_combo$year)
+model2 <- lm(all_combo$wolf_cattle_kills~all_combo$year)
+model3 <- lm(all_combo$total_loss~all_combo$year)
+
+screenreg(list(model1,model2,model3),
+      custom.model.names= c("Wolf Population", 
+                           "Wolf Cattle Depredation", "Total Cattle Loss"),
+      digits=3,
+      caption.above=TRUE,
+      include.rsquared=TRUE,
+      include.adjrs=FALSE,
+      include.nobs=TRUE,
+      include.rmse=FALSE)
+       
+```
 
 According to Figure 6, confirmed wolf depredation events on cattle are on the rise for each state over this timeline. Table 1 predicts that every year there will be a 1.26 increase in cattle depredation from wolves. The standard error for that model is 1.4 indicating a low uncertainty. Figure 7 suggests that wolf population in these states is fairly stable and Table 1 indicates that every year there will be a 1.17 decrease in wolf population. However, the standard error for the wolf population model is quite high (21.8) indicating a higher degree of uncertainty. Model 3 suggests that cattle loss will increase by 211.328 every year, yet the standard error for that model is a sizable 737.278. None of the values in Table 1 have a p value lower than 0.05, meaning that these models are not showcasing statistically significant trends.  
 
