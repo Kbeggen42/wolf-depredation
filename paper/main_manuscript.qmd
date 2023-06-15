@@ -30,7 +30,8 @@ source(here("utils","check_packages.R"))
 source(here("utils","functions.R"))
 library(ggplot2)
 library(texreg)
-load(here("analysis","analysis.qmd"))
+load(here("data","data_constructed","analytical_data.RData"))
+#load(here("analysis","analysis.qmd"))
 ```
 
 # Introduction
@@ -170,7 +171,7 @@ Figures 6 and 7 display linear models that depict cattle depredation trends and 
 
 ```{r}
 #| label: tbl-1
-#| tbl-cap: LM Models
+#| tbl-cap: Linear Models
 #| results: asis
 
 model1 <- lm(all_combo$wolf_pop~all_combo$year)
