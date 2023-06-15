@@ -231,9 +231,6 @@ model1 <- lm(all_combo$wolf_pop~all_combo$year)
 model2 <- lm(all_combo$wolf_cattle_kills~all_combo$year)
 model3 <- lm(all_combo$total_loss~all_combo$year)
 
-summary(model1)
-summary(model2)
-
 screenreg(list(model1,model2,model3),
       custom.model.names= c("Wolf Population", 
                            "Wolf Cattle Depredation", "Total Cattle Loss"),
